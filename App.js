@@ -63,23 +63,26 @@ function createEntryStore() {
 }
 
 function suchen() {
-  document.getElementById("ergebnis").innerHTML = "";
-  let store = createEntryStore();
-  let begriff = document.getElementById("searchField").value;
-  let gefunden = [];
+  document.getElementById("ergebnis").innerHTML = ""; //Setzt den Ergebnis Container zurück
+  let store = createEntryStore(); //Erstellt den Store
+  let begriff = document.getElementById("searchField").value; //Zieht den Wert aus InputField
+  let gefunden = []; //Array für die Entries die den Suchbegriff enthalten
 
-  store.entries.map((item) => {
-    console.log("item", item.text);
+//1. Map durch store
+//2. Die Texte werden zu Array aus Worten und in res gespeichert
+//3. Wenn eines der Worte in res gleich dem Suchbegriff, dann push in gefunden-array, wenn nicht dann nix/0
+//4. return gefunden
+
+  store.entries.map((item) => { 
     res = item.text.split(" ");
-    //console.log("res", res);
-    console.log("res-include", res.includes(begriff));
-    if (res.includes(begriff)) {
-      gefunden.push(item);
-      return gefunden;
-    } else {
-      return 0;
-    }
+    res.includes(begriff) ? gefunden.push(item) : 0;
+    return gefunden;
   });
+
+// 1. Wenn gefunden array nicht leer, dann sortiere nach Datum
+// 2. Map durch sortierten gefunden-array und erstelle einen paragraph und einen TextNode und füge diese bei Element-ID Ergebnis ein
+// 3. Wenn gefunden array leer, dann zeige Antwort "Kein Ergebnis"
+
   gefunden.length > 0
     ? gefunden
         .sort(function (a, b) {
