@@ -5,10 +5,11 @@
 /**
  * A store of Entry-objects.
  */
-class EntryStore
-{
-	constructor()
-	{
-		this.entries = [];
-	}
+class EntryStore {
+  constructor() {
+    this.entries = [];
+  }
+  addEntry(_entry) {
+    this.entries.push(_entry);
+  }
 }
