@@ -63,33 +63,36 @@ function createEntryStore() {
 }
 
 function suchen() {
+  document.getElementById("ergebnis").innerHTML = "";
   let store = createEntryStore();
-  console.log("store", store);
   let begriff = document.getElementById("searchField").value;
-  console.log("begriff", begriff);
   let gefunden = [];
 
   store.entries.map((item) => {
     console.log("item", item.text);
     res = item.text.split(" ");
-    console.log("res", res);
-    res.map((wort) => {
-      if (wort === begriff) {
-        gefunden.push(item);
-        console.log("gefunden Array", gefunden);
-        gefunden
-          .sort(function (a, b) {
-            // Turn your strings into dates, and then subtract them
-            // to get a value that is either negative, positive, or zero.
-            return new Date(b.date) - new Date(a.date);
-          })
-          .map((res) => {
-            document.getElementById("ergebnis").innerHTML =
-              res.title + " " + res.text + " " + res.date;
-          });
-      } else {
-        console.log("nicht gefunden");
-      }
-    });
+    //console.log("res", res);
+    console.log("res-include", res.includes(begriff));
+    if (res.includes(begriff)) {
+      gefunden.push(item);
+      return gefunden;
+    } else {
+      return 0;
+    }
   });
+  gefunden.length > 0
+    ? gefunden
+        .sort(function (a, b) {
+          return new Date(b.date) - new Date(a.date);
+        })
+        .map((res) => {
+          var tag = document.createElement("p");
+          var text = document.createTextNode(
+            res.title + " " + res.text + " " + res.date
+          );
+          tag.appendChild(text);
+          var element = document.getElementById("ergebnis");
+          element.appendChild(tag);
+        })
+    : (document.getElementById("ergebnis").innerHTML = "Kein Ergebnis");
 }
