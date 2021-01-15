@@ -7,20 +7,6 @@
  *
  * @returns {EntryStore} The created EntryStore with entries.
  */
-
-/*
- * @param _text {string} The text of this entry.
- * @param _title {string} The title of this entry.
- * @param _date {Date} The date of this entry.
- * @constructor
- */
-
-/*
- * Adds the given Entry.
- *
- * @param _entry {Entry} The Entry we have to add.
- */
-
 function createEntryStore() {
   let store = new EntryStore();
 
